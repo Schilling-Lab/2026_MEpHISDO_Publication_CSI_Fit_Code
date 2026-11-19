@@ -1,0 +1,45 @@
+# Plotter Registry Configuration
+#
+# This file defines the mapping between plotter keys and their implementations,
+# directly referencing the existing plotter classes in utils/plot/
+#
+# Configuration format:
+# plotters:
+#   <plotter_key>:
+#     class: <full.module.path.ClassName>
+#     categories: [<category1>, <category2>, ...]
+#     options:
+#       <option_name>: <default_value>
+
+plotters:
+  anatomy:
+    class: hypermri.utils.plot.anatomyPlotter.AnatomyPlotter
+    categories: [anatomical]
+    options:
+      figsize: [10, 5]
+      cmap: gray
+      interpolation: bilinear
+      show_colorbar: true
+
+  spectroscopy:
+    class: hypermri.utils.plot.spectroscopyPlotter.SpectroscopyPlotter
+    categories: [spectroscopy]
+    options:
+      figsize: [10, 5]
+      show_ppm: true
+      show_hz: false
+      line_width: 1.0
+
+# Default plotter selections for categories
+defaults:
+  anatomical: anatomy
+  spectroscopy: spectroscopy
+
+# Visualization settings
+visualization:
+  default_figsize: [8, 6]
+  default_dpi: 100
+  default_backend: inline
+  color_schemes:
+    anatomical: gray
+    spectroscopy: viridis

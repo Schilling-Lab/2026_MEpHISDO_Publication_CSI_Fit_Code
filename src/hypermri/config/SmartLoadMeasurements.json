@@ -1,0 +1,15 @@
+{
+    "CSI": [
+        "<Bruker:CSI>",
+        "<User:lucaCSIReco>",
+        "<User:lucaCSI>",
+        "<User:lucaCSI2>",
+        "<User:lucaCSI3>",
+        "<User:lucaCSI4>",
+        "<User:geoffCSI>",
+        "<User:csi_fix>"
+    ],
+    "RARE": [
+        "<Bruker:RARE>"
+    ]
+}

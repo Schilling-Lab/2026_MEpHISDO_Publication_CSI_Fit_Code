@@ -1,0 +1,14 @@
+# Vendor Handler Mapping Configuration
+# This file defines vendor detection patterns and handler classes
+
+vendors:
+  bruker:
+    handler_class: hypermri.brukerexp.BrukerHandler
+    priority: 100
+    detection_patterns:
+      - "file:fid"              # Has fid file
+      - "file:rawdata.job0"     # Has rawdata.job0 file
+      - "file:2dseq"            # Has 2dseq file
+      - "contains:method"       # Directory contains method file
+      - "contains:acqp"         # Directory contains acqp file
+      - "contains:visu_pars"    # Directory contains visu_pars file

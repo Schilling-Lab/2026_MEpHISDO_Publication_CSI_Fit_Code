@@ -1,0 +1,101 @@
+Metadata-Version: 2.4
+Name: hypermri
+Version: 0.0.0
+Summary: Schilling-AG python module to work with Bruker MRI data
+Author-email: Andre Wendlinger <andre.wendlinger@tum.de>, Wolfgang Gottwald <wolfgang.gottwald@tum.de>, Luca Nagel <luca.nagel@tum.de>, Jakob Gaubatz <jakob.gaubatz@tum.de>, Miriam Kirst <miriam.kirst@tum.de>, Ben Georges Danzer <ben.danzer@tum.de>, Jacopo Frignani <jacopo.frignani@tum.de>
+License: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: License :: OSI Approved :: Apache License
+Classifier: Intended Audience :: Science/Research
+Requires-Python: >=3.10.0
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.19.5
+Requires-Dist: brukerapi @ git+https://github.com/LucaNagel/brukerapi-python/#egg=read_in_complex_2dseq
+Requires-Dist: matplotlib>=3.9
+Requires-Dist: pydicom>=3.0.0
+Requires-Dist: nbclassic>=0.5.3
+Requires-Dist: notebook>=6.5.0
+Requires-Dist: jupyterlab>=3.6.1
+Requires-Dist: ipywidgets>=8.0.4
+Requires-Dist: scipy>=1.9.1
+Requires-Dist: ipympl>=0.9.3
+Requires-Dist: tqdm>=4.65.0
+Requires-Dist: pandas>=1.5.3
+Requires-Dist: openpyxl
+Requires-Dist: xarray>=2024.3.0
+Requires-Dist: lmfit
+Requires-Dist: cmcrameri
+Requires-Dist: GitPython
+Requires-Dist: SciencePlots
+Requires-Dist: PyYAML
+Requires-Dist: cmap
+Provides-Extra: dev
+Requires-Dist: pip-tools>=7.4.1; extra == "dev"
+Requires-Dist: pytest>=7.2.2; extra == "dev"
+Requires-Dist: pytest-cov>=4.0.0; extra == "dev"
+Requires-Dist: tox>=4.4.6; extra == "dev"
+Requires-Dist: mypy>=0.910; extra == "dev"
+Requires-Dist: bandit>=1.7.0; extra == "dev"
+Requires-Dist: pre-commit>=2.15.0; extra == "dev"
+Requires-Dist: yamllint>=1.32.0; extra == "dev"
+Requires-Dist: tomli>=1.2.0; extra == "dev"
+Requires-Dist: ruff>=0.3.0; extra == "dev"
+Dynamic: license-file
+
+# hypermri 🧲 (CSI fit edition)
+
+**Schilling-AG python module to work with Bruker MRI data, reduced to loading, reconstructing and fitting CSI data.**
+
+This is a slimmed-down copy of hypermri. It contains only what is needed to
+load a Bruker study, reconstruct CSI scans (plus RARE scans as anatomical
+reference), view them interactively, and fit the spectra with the robust
+multi-peak pipeline (`hypermri.analysis.fitting.robust_fit_pipeline`).
+Data is handled as **xarray** datasets.
+
+The full package lives at
+[gitlab.lrz.de/mri_nuk/python/python-code-bruker-7t](https://gitlab.lrz.de/mri_nuk/python/python-code-bruker-7t).
+
+## Installation
+
+We strictly recommend using **[Anaconda](https://anaconda.org/)** (or Miniconda) to manage dependencies.
+
+**Prerequisites:**
+* **Git**: Required to download specific dependencies (`brukerapi`). [Install Git](https://git-scm.com/downloads).
+
+1. **Create (anaconda) environment**
+```bash
+conda create -n hypermri_dev python=3.10
+conda activate hypermri_dev
+conda install git
+```
+
+2. **Install package** (run in the folder containing `pyproject.toml`)
+```bash
+pip install -e .
+```
+
+## Usage
+
+See `examples/Fit CSI.ipynb` for the complete workflow (loading, noise
+estimation, multi-peak fitting, pH maps). In short:
+
+```python
+import hypermri
+from hypermri.analysis.fitting.robust_fit_pipeline import (
+    prepare_inputs_for_multipeak,
+    fit_data_multipeak,
+)
+
+# Load a study folder (CSI and RARE scans are recognised automatically)
+study = hypermri.Study("path/to/study/folder", load_data=True)
+
+csi = study[77]
+csi.combine_channels(adjust_phase=True, channel_combination="phase_aligned")
+csi.plot()  # interactive viewer
+```
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for details.

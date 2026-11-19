@@ -1,0 +1,17 @@
+# Sequence Alias Mapping Configuration
+# Converts raw Bruker Method names to canonical sequence types
+# Derived from SmartLoadMeasurements.json to maintain compatibility
+
+aliases:
+  # CSI sequence aliases
+  "<bruker:csi>": "csi"
+  "<user:lucacsireco>": "csi"
+  "<user:lucacsi>": "csi"
+  "<user:lucacsi2>": "csi"
+  "<user:lucacsi3>": "csi"
+  "<user:lucacsi4>": "csi"
+  "<user:geoffcsi>": "csi"
+  "<user:csi_fix>": "csi"
+
+  # RARE sequence aliases
+  "<bruker:rare>": "rare"

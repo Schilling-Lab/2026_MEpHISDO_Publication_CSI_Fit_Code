@@ -1,0 +1,35 @@
+# Reconstruction Strategy Mapping Configuration
+
+vendors:
+  bruker:
+    sequences:
+      # RARE sequence
+      rare:
+        raw:
+          strategy: hypermri.recon_strategy.BrukerRareRawRecoStrategy
+          options:
+            data_precision: "float16"
+        seq2d:
+          strategy: hypermri.recon_strategy.Brukerseq2dRecoStrategy
+          options:
+            data_precision: "float16"
+
+      # CSI sequence - uses specialized strategy
+      csi:
+        raw:
+          strategy: hypermri.recon_strategy.BrukerCsiRecoStrategy
+          options:
+        seq2d:
+          strategy: hypermri.recon_strategy.Brukerseq2dRecoStrategy
+          options: {}
+
+      # Default fallback strategies
+      default:
+        raw:
+          strategy: hypermri.recon_strategy.BrukerRawRecoStrategy
+          options:
+            data_precision: "float16"
+        seq2d:
+          strategy: hypermri.recon_strategy.Brukerseq2dRecoStrategy
+          options:
+            data_precision: "float16"
