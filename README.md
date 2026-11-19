@@ -30,26 +30,6 @@ conda install git
 pip install -e .
 ```
 
-## Usage
-
-See `examples/Fit CSI.ipynb` for the complete workflow (loading, noise
-estimation, multi-peak fitting, pH maps). In short:
-
-```python
-import hypermri
-from hypermri.analysis.fitting.robust_fit_pipeline import (
-    prepare_inputs_for_multipeak,
-    fit_data_multipeak,
-)
-
-# Load a study folder (CSI and RARE scans are recognised automatically)
-study = hypermri.Study("path/to/study/folder", load_data=True)
-
-csi = study[77]
-csi.combine_channels(adjust_phase=True, channel_combination="phase_aligned")
-csi.plot()  # interactive viewer
-```
-
 ## License
 
 MIT License. See [LICENSE](LICENSE) for details.
